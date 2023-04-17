@@ -2,6 +2,37 @@
 
 # technical function to profile table        
 def profile(df):
+    
+    """
+    
+    Profile pandas dataframe providing information on dataframe shape, size and amount of datapoints, columns and value types.
+    
+    Parameters:
+        df(pandas.DataFrame): dataframe to be profiled.
+        
+     Returns:
+        Printout with table description
+    DATAFRAME:
+    10,602 rows | 4 columns
+    42,408 datapoints
+    0.3MB disk space
+    ------------------------
+    DTYPES:
+    Country       object
+    Period        object
+    Value        float64
+    Indicator     object
+    dtype: object
+    ------------------------
+    VALUE TYPES:
+    Country: [<class 'str'>]
+    Period: [<class 'str'>]
+    Value: [<class 'float'>]
+    Indicator: [<class 'str'>]
+    ------------------------
+    COLUMNS:
+    ['Country', 'Period', 'Value', 'Indicator']
+    """
 
     value_types = [[c, df[c].apply(lambda x: type(x)).unique().tolist()] for c in df.columns]
 
@@ -26,26 +57,4 @@ def profile(df):
     print(df.columns.tolist())
     
     
-    # sample output:
-    """
-    DATAFRAME:
-    10,602 rows | 4 columns
-    42,408 datapoints
-    0.3MB disk space
-    ------------------------
-    DTYPES:
-    Country       object
-    Period        object
-    Value        float64
-    Indicator     object
-    dtype: object
-    ------------------------
-    VALUE TYPES:
-    Country: [<class 'str'>]
-    Period: [<class 'str'>]
-    Value: [<class 'float'>]
-    Indicator: [<class 'str'>]
-    ------------------------
-    COLUMNS:
-    ['Country', 'Period', 'Value', 'Indicator']
-    """
+   
