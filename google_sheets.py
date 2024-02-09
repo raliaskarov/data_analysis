@@ -6,6 +6,11 @@ from google.auth import default
 import gspread_dataframe as gd
 from gspread_dataframe import set_with_dataframe
 
+# Authenticate and create the gspread client
+auth.authenticate_user()
+creds, _ = default()
+gc = gspread.authorize(creds)
+
 # function to read single cell from google sheets
 def read_google_sheet_cell(workbook_id, worksheet_name, cell):
     # Connect to Google Sheets file
