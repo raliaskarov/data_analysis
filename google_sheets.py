@@ -1,5 +1,11 @@
 # set of functions to communicate with google sheets
 
+import gspread
+from google.colab import auth
+from google.auth import default
+import gspread_dataframe as gd
+from gspread_dataframe import set_with_dataframe
+
 # function to read single cell from google sheets
 def read_google_sheet_cell(workbook_id, worksheet_name, cell):
     # Connect to Google Sheets file
