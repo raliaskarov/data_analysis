@@ -11,6 +11,13 @@ auth.authenticate_user()
 creds, _ = default()
 gc = gspread.authorize(creds)
 
+# function to clear google worksheet
+def clear_worksheet(workbook_id, worksheet_name):
+    workbook = gc.open_by_key(workbook_id)
+    worksheet = workbook.worksheet(worksheet_name)
+    worksheet.clear()
+
+
 # function to read single cell from google sheets
 def read_google_sheet_cell(workbook_id, worksheet_name, cell):
     # Connect to Google Sheets file
@@ -24,18 +31,19 @@ def read_google_sheet_cell(workbook_id, worksheet_name, cell):
     return cell_value
 
 
-def write_to_google_sheet(workbook_id, worksheet_name, df):
+def write_to_google_sheet(workbook_id, worksheet_name, df, start_row = 1, start_col = 1, clear_content = False):
     # connect to google sheets file
     workbook = gc.open_by_key(workbook_id)
 
     # reach sheet
     worksheet = workbook.worksheet(worksheet_name)
 
-    # Clear the existing worksheet content
-    worksheet.clear()
+    if clear_content:
+        # Clear the existing worksheet content
+        worksheet.clear()
 
     # Write the DataFrame to the worksheet
-    set_with_dataframe(worksheet, df)
+    set_with_dataframe(worksheet, df, row=start_row, col=start_col)
 
 def write_string_to_google_sheet_cell(workbook_id, worksheet_name, cell, string_value):
     # Connect to Google Sheets file
